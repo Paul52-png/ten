@@ -1,0 +1,31 @@
+class MyIterator:
+    def __init__(self, n):
+        self.n = n
+        self.current = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.current <= self.n:
+            result = self.current
+            self.current += 1
+            return result
+        else:
+            raise StopIteration
+
+    def count_down(self):
+        for i in range(self.n, -1, -1):
+            yield i
+
+    def multiplier(self, m):
+        def multiply(number):
+            return number * m
+        return multiply
+
+def print_result(func):
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+        print(f"результат: {result}")
+        return result
+    return wrapper
